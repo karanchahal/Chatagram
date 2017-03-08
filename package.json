@@ -1,0 +1,17 @@
+{
+  "name": "chatbot",
+  "version": "1.0.0",
+  "description": "a bank services chatbot",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "prompt": "^1.0.0",
+    "prompt-sync": "^4.1.4",
+    "watson-developer-cloud": "^2.25.1"
+  }
+}
