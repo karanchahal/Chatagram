@@ -1,4 +1,13 @@
 {
-  "username" : "ff440daf-02a2-4574-a4ef-a71ad8de0e1a",
-  "password" : "DBDwC5uc7brf"
+  "conversation":
+  {
+    "username" : "ff440daf-02a2-4574-a4ef-a71ad8de0e1a",
+    "password" : "DBDwC5uc7brf"
+  },
+  "watson":
+  {
+    "url": "https://gateway.watsonplatform.net/tone-analyzer/api",
+    "username": "53bc88bc-ef66-4dc9-9ce1-c9b52bdcd24a",
+    "password": "RUyVFJKGSOwU"
+  }
 }

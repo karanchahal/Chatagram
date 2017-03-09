@@ -1,0 +1,20 @@
+{
+  "1234":
+  {
+    "name":"Karanbir Singh Chahal",
+    "balance": "1230000",
+    "currency": "rupees"
+  },
+  "2345":
+  {
+    "name":"Anshuman Chabbra",
+    "balance": "1230001",
+    "currency": "rupees"
+  },
+  "5678":
+  {
+    "name":"Vidushi Vashisht",
+    "balance": "1230002",
+    "currency": "rupees"
+  }
+}
