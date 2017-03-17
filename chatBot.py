@@ -33,12 +33,12 @@ def authenticate(acc_no,pincode):
 Deals With Various responses and Updates Context Variables for directing conversation flow
 '''
 def dealWith(response):
-
+    more_response = ''
     if('verified' in response['context']):
-        
+
         if(response['context']['verified'] == "1" and response['output']['nodes_visited'][0] == 'bank-balance'):
             acc_no = response['context']['acc_no']
-            print(users[acc_no]['name'] + "'s account balance is " + users[acc_no]['balance'] + " " +users[acc_no]['currency'])
+            more_response = users[acc_no]['name'] + "'s account balance is " + users[acc_no]['balance'] + " " +users[acc_no]['currency']
 
     if(response['output']['nodes_visited'][0] == 'account-number'):
         response['context']['acc_no'] = response['entities'][0]['value']
@@ -46,7 +46,7 @@ def dealWith(response):
         response['context']['pincode'] = users[acc_no]['pincode']
 
 
-    return response
+    return response,more_response
 
 
 ''' Helper functions '''
@@ -61,12 +61,6 @@ def converse(inputline):
       message_input={'text': inputline},
       context=context
     )
-    printJSON(response['output']['text'])
-    response = dealWith(response)
+    response,additionalResponse = dealWith(response)
     context = response['context']
-
-
-
-''' Command line interface'''
-for line in fileinput.input():
-    converse(line.strip())
+    return response['output']['text'][0] +'\n' +  additionalResponse
