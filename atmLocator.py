@@ -10,6 +10,8 @@ latitude = 28.604009 #Have to get these from client side
 longitude = 77.048278 #Have to get these from client side
 
 
+
+
 result = urlopen("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + str(latitude) + "," + str(longitude) + "&radius=" + str(radius) + "&type=" + "atm" + "&key=" + API_KEY +"&keyword=federalbank")
 
 json_obj = json.load(result)
