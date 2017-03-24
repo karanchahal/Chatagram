@@ -48,3 +48,16 @@ This will run on port 3110 on localhost.
 Now you have to start the client framework made in react, that is ,in the Chatagram-client repository.
 
 Head over there to complete the building process.
+
+
+# Users and Account information
+There is a file named ```users.json```. The chatbot uses this file as the bank's database and looks up the various details like account number, pincode etc .
+
+When testing out the bot, please refer to the the details in this file for logging in etc and email. One can change the email to test out the email service for account statement.
+
+This is done to prove that that the chatbot was constructed in such a way that the bank's operations can be easily plugged in with the use of API's with no substantial code change.
+
+
+# Contact
+Don't hesitate to ask for help to run the software.
+Contact at ```karanbleep@gmail.com```

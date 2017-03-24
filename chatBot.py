@@ -201,11 +201,11 @@ def dealWith(response):
         response['context']['pincode'] = users[acc_no]['pincode']
 
 
-    if(response['context']['sentiment'] > 5):
+    if(response['context']['sentiment'] > 2):
         final_response['data'] = final_response['data'] + '\n' + 'If you like this service please check out <awesome-product-here> and <another-awesome-product-here>.FOr more information visit <interesting-links-here>'
         response['context']['sentiment'] = 0
 
-    if(response['context']['sentiment'] < -5):
+    if(response['context']['sentiment'] < -2):
         final_response['data'] = final_response['data'] + '\n' + 'If you are having trouble with this service, our human operator is more than happy to help. Contact Shilpa <number here>, toll free'
         response['context']['sentiment'] = 0
 
