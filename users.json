@@ -4,20 +4,24 @@
     "name":"Karanbir Singh Chahal",
     "balance": "1230000",
     "currency": "rupees",
-    "pincode": "1000"
+    "pincode": "1000",
+    "email": "karanbleep@gmail.com"
   },
   "2345":
   {
     "name":"Anshuman Chabbra",
     "balance": "1230001",
     "currency": "rupees",
-    "pincode": "2000"
+    "pincode": "2000",
+    "email": "karanbleep@gmail.com"
   },
   "5678":
   {
     "name":"Vidushi Vashisht",
     "balance": "1230002",
     "currency": "rupees",
-    "pincode": "3000"
-  }
+    "pincode": "3000",
+    "email": "karanbleep@gmail.com"
+  },
+  "mobile-deals": "200 for full talk time \n 300 for full talk time and 1 GB 3G \n 500 for full talk time 10 GB 4G"
 }
