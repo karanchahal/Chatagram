@@ -1,4 +1,7 @@
 # Chatagram
+
+
+![alt text](/Screenshots/new.gif)
 A ChatBot for a bank.
 Has the following functionalities.
 - [x] Balance check
