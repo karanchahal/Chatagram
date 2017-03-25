@@ -48,3 +48,10 @@ This will run on port 3110 on localhost.
 Now you have to start the client framework made in react, that is ,in the Chatagram-client repository.
 
 Head over there to complete the building process.
+
+
+# Account information and login/verification
+
+To access most of the features one would need to log in. To do that you need to enter account number and pin code.
+There is a file named ```users.json```  which has all the user account information including account number ,pincode ,email etc etc.
+One can edit inforamtion however they see fit.
