@@ -53,7 +53,10 @@ Head over there to complete the building process.
 # Users and Account information
 There is a file named ```users.json```. The chatbot uses this file as the bank's database and looks up the various details like account number, pincode etc .
 
-When testing out the bot, please refer to the the details in this file for logging in etc and email. One can change the email to test out the email service for account statement.
+When testing out the bot, please refer to the the details in this file for logging in etc and email. One can change the email and/or other parameters to test out the email service for account statement.
+
+To access most of the features one would need to log in. To do that you need to enter account number and pin code.
+
 
 This is done to prove that that the chatbot was constructed in such a way that the bank's operations can be easily plugged in with the use of API's with no substantial code change.
 
