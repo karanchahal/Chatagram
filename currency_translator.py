@@ -5,10 +5,10 @@ from urllib import urlopen
 import json
 
 access_key = "0bf55c1bfb56b4ccc67bed85426233b2" # 1000 requestsallowed per acess_key
-	format = 1
-	returned_json = urlopen("http://apilayer.net/api/live" + "?access_key=" + access_key + "&format")
-	str_result = returned_json.read().decode('utf-8')
-	json_obj = json.loads(str_result)
+format = 1
+returned_json = urlopen("http://apilayer.net/api/live" + "?access_key=" + access_key + "&format")
+str_result = returned_json.read().decode('utf-8')
+json_obj = json.loads(str_result)
 	
 	
 # ruppee to foreign currency
