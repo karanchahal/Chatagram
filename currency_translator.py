@@ -16,15 +16,15 @@ def currency_convertor(arg1, USD_currency, EUR_currency, DRM_currency):  #arg1 i
 	result_USD = arg1/json_obj["quotes"]["USDINR"]
 
 	if(USD_currency):
-		print(result_USD)
+		print(str(result_USD) + " $")
 
 	elif(EUR_currency):
 		result_EUR = result_USD*json_obj["quotes"]["USDEUR"]
-		print(result_EUR)
+		print(str(result_EUR) + " Euros")
 
 	elif(DRM_currency):
 		result_DRM = result_USD*json_obj["quotes"]["USDAED"]
-		print(result_DRM)
+		print(str(result_DRM) + " Dirhams")
 
 	return ;
 
