@@ -4,14 +4,15 @@
 from urllib import urlopen
 import json
 
-# ruppee to foreign currency
-def currency_convertor(arg1, USD_currency, EUR_currency, DRM_currency):  #arg1 in INR #set rest of the arguments as boolean contexts from the dataflow nodes
-	
-	access_key = "0bf55c1bfb56b4ccc67bed85426233b2" # 1000 requestsallowed per acess_key
+access_key = "0bf55c1bfb56b4ccc67bed85426233b2" # 1000 requestsallowed per acess_key
 	format = 1
 	returned_json = urlopen("http://apilayer.net/api/live" + "?access_key=" + access_key + "&format")
 	str_result = returned_json.read().decode('utf-8')
 	json_obj = json.loads(str_result)
+	
+	
+# ruppee to foreign currency
+def currency_convertor(arg1, USD_currency, EUR_currency, DRM_currency):  #arg1 in INR #set rest of the arguments as boolean contexts from the dataflow nodes
 
 	result_USD = arg1/json_obj["quotes"]["USDINR"]
 
@@ -30,14 +31,6 @@ def currency_convertor(arg1, USD_currency, EUR_currency, DRM_currency):  #arg1 i
 
 #foreign to indian
 def currency_convertor2(USD_currency, EUR_currency, DRM_currency): #arguments contain currency value.
-	
-	
-	access_key = "0bf55c1bfb56b4ccc67bed85426233b2"
-	format = 1
-
-	returned_json = urlopen("http://apilayer.net/api/live" + "?access_key=" + access_key + "&format")
-	str_result = returned_json.read().decode('utf-8')
-	json_obj = json.loads(str_result)
 
 	USD_INR_ratio = json_obj["quotes"]["USDINR"]
 
