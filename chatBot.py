@@ -1,4 +1,5 @@
 from watson_developer_cloud import ConversationV1
+from watson_developer_cloud import ToneAnalyzerV3
 import json
 import fileinput
 import atmLocator
@@ -25,10 +26,24 @@ conversation = ConversationV1(
   version='2017-02-03'
 )
 
+tone_analyzer = ToneAnalyzerV3(
+   username=config['watson']['username'],
+   password=config['watson']['password'],
+   version='2016-05-19')
+
 # Variables
 global context
 context = {}
 workspace_id = 'fba7b3e5-6881-416c-9cf1-578fce2a9fee'
+
+
+def analyseTone(chatMessage):
+    toneData = tone_analyzer.tone(text=chatMessage)['document_tone']['tone_categories']
+    negative_sentiment = toneData[0]['tones'][0]['score'] + toneData[0]['tones'][1]['score'] + toneData[0]['tones'][2]['score'] +  toneData[0]['tones'][4]['score']
+    positive_sentiment = toneData[0]['tones'][3]['score'] + toneData[2]['tones'][0]['score'] + toneData[2]['tones'][2]['score'] + toneData[2]['tones'][3]['score']
+
+    total_sentiment = positive_sentiment - negative_sentiment
+    return(total_sentiment)
 
 ''' Authenticates/logs-in user '''
 def authenticate(acc_no,pincode):
@@ -66,11 +81,20 @@ def getDates(context):
 '''
 Deals With Various responses and Updates Context Variables for directing conversation flow
 '''
-def dealWith(response):
+def dealWith(response,toneData):
     more_response = ''
     final_response = {}
     if('sentiment' not in response['context']):
         response['context']['sentiment'] = 0
+
+    '''
+    if(toneData > 1):
+        response['context']['sentiment'] = float(response['context']['sentiment']) + 0.5
+    elif(toneData < 0):
+        response['context']['sentiment'] = float(response['context']['sentiment']) - 0.5
+    '''
+
+    print(response['context']['sentiment'])
 
     final_response['data'] = response['output']['text'][0]
 
@@ -225,6 +249,7 @@ def printJSON(printThis):
 ''' Driver main function '''
 def converse(inputline):
 
+    #toneData = analyseTone(inputline)
     global context
     response = conversation.message(
       workspace_id=workspace_id,
@@ -232,6 +257,6 @@ def converse(inputline):
       context=context
     )
 
-    response,final_response = dealWith(response)
+    response,final_response = dealWith(response,0)
     context = response['context']
     return final_response
