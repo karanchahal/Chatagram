@@ -4,6 +4,7 @@ import fileinput
 import atmLocator
 import calculator
 import requests
+import currency_translate
 
 key = 'key-0335ffc6179bb9f65d104cf06eb11aae'
 sandbox = 'sandbox102ac7d1115646e1a481e5ef5dce6f0b.mailgun.org'
@@ -37,10 +38,9 @@ def authenticate(acc_no,pincode):
         return False
 
 def getNumber(context):
-    if( len(context) > 1):
-        return int(context[2]['value'])
-    else:
-        return int(context[0]['value'])
+        for i in range(len(context)):
+            if(context[i]['entity'] == 'sys-number'):
+                return context[i]['value']
 
 def getCalculatorNumbers(context):
     listNum = []
@@ -76,12 +76,11 @@ def dealWith(response):
 
     if('verified' in response['context']):
 
-
         if(response['output']['nodes_visited'][0] == 'fund-transfer-account-number'):
             response['context']['transfer-to'] = getNumber(response['entities'])
 
         if(response['output']['nodes_visited'][0] == 'fund-transfer-balance'):
-            amountTransfer = getNumber(response['entities'])
+            amountTransfer = int(getNumber(response['entities']))
             acc_no = response['context']['acc_no']
             acc_no_to = response['context']['transfer-to']
             if(int(users[acc_no]['balance']) >= amountTransfer):
@@ -93,7 +92,7 @@ def dealWith(response):
 
 
         if(response['output']['nodes_visited'][0] == 'fd-balance'):
-            fd_balance = getNumber(response['entities'])
+            fd_balance = int(getNumber(response['entities']))
             acc_no = response['context']['acc_no']
             if(int(users[acc_no]['balance']) >= fd_balance):
                 users[acc_no]['balance'] = int(users[acc_no]['balance']) - fd_balance
@@ -108,7 +107,7 @@ def dealWith(response):
             final_response['data'] = final_response['data'] + users['mobile-deals']
 
         if(response['output']['nodes_visited'][0] == 'recharge-money'):
-            rechargeAmount = getNumber(response['entities'])
+            rechargeAmount = int(getNumber(response['entities']))
             acc_no = response['context']['acc_no']
             if(int(users[acc_no]['balance']) >= rechargeAmount):
                 users[acc_no]['balance'] = int(users[acc_no]['balance']) - rechargeAmount
@@ -137,6 +136,13 @@ def dealWith(response):
                 'subject': 'Account Statement',
                 'text': 'this is your account statement from ' + dates[0] + " to " + dates[1]
             })
+
+
+    if(response['output']['nodes_visited'][0] == 'final-convert'):
+        amount = float(getNumber(response['entities']))
+        print(amount)
+        newAmount = currency_translate.translate(amount,response['context']['currency_from'],response['context']['currency_to'])
+        final_response['data'] = final_response['data'] + '\n' + 'The converted amount is ' + str(newAmount)+' ' +response['context']['currency_to'] + ' !. Is that fine ?'
 
     if(response['output']['nodes_visited'][0] == 'getting-data-fixed'):
 
