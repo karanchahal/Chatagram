@@ -1,13 +1,42 @@
 import faceRecognizer
 import os
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
+from flask_socketio import SocketIO, send, emit
+import base64
+import Image
 
+
+faceRecognizer.enroll_faces()
 app = Flask(__name__)
 
+
+app.config['SECRET_KEY'] = 'mysecret'
+socketio = SocketIO(app)
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 app.config['UPLOAD_FOLDER'] = 'user_uploads/'
 app.config['ALLOWED_EXTENSIONS'] = set(['png', 'jpg', 'jpeg', 'gif'])
+
+
+
+
+@socketio.on('faceverify')
+def faceverify(payload):
+    img_data = payload['picture'][23:]
+    imgdata = base64.b64decode(payload['picture'][23:])
+
+    fh = open("./dump/imageToSave.webp", "wb")
+    fh.write(img_data.decode('base64'))
+    fh.close()
+
+    im = Image.open("./dump/imageToSave.webp").convert("RGB")
+    im.save("./actual/final_image.jpg","jpeg")
+
+    account_id = faceRecognizer.facerec(dir_path + '/actual/final_image.jpg')
+    print('AccountId: ',account_id)
+
+
+
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -37,10 +66,4 @@ def uploaded_file(filename):
 
 #Use port 7979 for listening in. Cheers bruh
 if __name__ == '__main__':
-    app.run(
-        host="0.0.0.0",
-        port=int("7979"),
-        debug=True
-    )
-
-    
+    socketio.run(app, host='0.0.0.0', debug = True, port = 3111, use_reloader = True) #Open localhost:3110 to run this in your browser -.-
