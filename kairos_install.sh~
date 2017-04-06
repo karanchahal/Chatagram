@@ -1,0 +1,2 @@
+cd kairos
+sudo pip install .
