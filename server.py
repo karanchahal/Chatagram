@@ -10,6 +10,7 @@ socketio = SocketIO(app)
 
 @socketio.on('message')
 def handleMessage(payload):
+    print(payload['dataset'])
     response = chatBot.converse(payload['message'])
     print(response)
     if('map' in response):

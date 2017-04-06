@@ -12,17 +12,19 @@ def currency_convertor(arg1, USD_currency, EUR_currency, DRM_currency,json_obj):
 	result_USD = arg1/json_obj["quotes"]["USDINR"]
 
 	if(USD_currency):
+		result_USD = float("{0:.2f}".format(result_USD))
 		return(str(result_USD) + " $")
 
 	elif(EUR_currency):
 		result_EUR = result_USD*json_obj["quotes"]["USDEUR"]
+		result_EUR = float("{0:.2f}".format(result_EUR))
 		return(str(result_EUR) + " Euros")
 
 	elif(DRM_currency):
 		result_DRM = result_USD*json_obj["quotes"]["USDAED"]
 		return(str(result_DRM) + " Dirhams")
 
-	
+
 
 #foreign to indian
 def currency_convertor2(USD_currency, EUR_currency, DRM_currency,json_obj): #arguments contain currency value.
@@ -30,10 +32,11 @@ def currency_convertor2(USD_currency, EUR_currency, DRM_currency,json_obj): #arg
 	USD_INR_ratio = json_obj["quotes"]["USDINR"]
 
 	if(USD_currency):
-		return (USD_currency * USD_INR_ratio)
+		return float("{0:.2f}".format(USD_currency * USD_INR_ratio))
 
 	elif(EUR_currency):
 		result_EUR = (EUR_currency/json_obj["quotes"]["USDEUR"])*USD_INR_ratio
+		result_EUR = float("{0:.2f}".format(result_EUR))
 		return (result_EUR)
 
 	elif(DRM_currency):
