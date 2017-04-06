@@ -36,6 +36,25 @@ def faceverify(payload):
     print('AccountId: ',account_id)
 
 
+@socketio.on('faceregister')
+def faceregister(payload):
+    #Make requireed changes please Karan here 
+    img_data = payload['picture'][23:]
+    imgdata = base64.b64decode(payload['picture'][23:])
+    acc_num = 2222 #Use socket.io to send this value Karan
+    
+    fh = open("./dump/imageToRegister.webp", "wb")
+    fh.write(img_data.decode('base64'))
+    fh.close()
+
+    im = Image.open("./dump/imageToRegister.webp").convert("RGB")
+    im.save("./reg_faces/register_image.jpg","jpeg")
+
+    faceRecognizer.enroll_new_face(dir_path + '/reg_faces/register_image.jpg', str(acc_num))
+    #Now, internally the function enroll_new_face will iterate over the users.json to add the account id for the person too
+    print "New User Registered"
+
+
 
 
 def allowed_file(filename):
@@ -57,13 +76,13 @@ def upload():
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
-    faceRecognizer.enroll_faces() #TO-DO: Yeh bakwass hai faaltu ka slowdown. Remove this in the future
+    faceRecognizer.enroll_faces() #TO-DO: Yeh bakwass hai faaltu ka slowdown. Remove this in the future -Anshuman
     account_id = faceRecognizer.facerec(dir_path + '/user_uploads/'+ filename)
     return account_id
     #print account_id
     #return send_from_directory(app.config['UPLOAD_FOLDER'],
     #                          filename)
 
-#Use port 7979 for listening in. Cheers bruh
+#Use port 3111 for listening in. Cheers bruh
 if __name__ == '__main__':
-    socketio.run(app, host='0.0.0.0', debug = True, port = 3111, use_reloader = True) #Open localhost:3110 to run this in your browser -.-
+    socketio.run(app, host='0.0.0.0', debug = True, port = 3111, use_reloader = True) #Open localhost:3111 to run this in your browser -.-
