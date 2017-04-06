@@ -41,7 +41,7 @@ Requirements are as follows:
 * watson_developer_cloud
 * requests
 * fileinput (included with python3.5)
-* json
+* json (included with python3.5)
 * urllib (included with python3.5)
 * PIL (in case using windows use 'image')
 * numpy
