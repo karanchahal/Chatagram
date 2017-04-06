@@ -8,6 +8,14 @@ socketio = SocketIO(app)
 
 
 
+@socketio.on('faceverify')
+def handlefaceverify(payload):
+
+    response = chatBot.converse(payload['acc_no'])
+    print(response)
+    emit('message',{'message':response['data']})
+
+
 @socketio.on('message')
 def handleMessage(payload):
     print(payload['dataset'])
@@ -15,6 +23,8 @@ def handleMessage(payload):
     print(response)
     if('map' in response):
         emit('map', {"map":1,'markers':response['data']})
+    elif('faceverify' in response):
+        emit('message',{'message':response['data'],'faceverify':1})
     else:
         emit('message',{'message':response['data']})
 

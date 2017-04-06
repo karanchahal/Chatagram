@@ -206,11 +206,18 @@ def dealWith(response,toneData):
         except:
             final_response['data'] = final_response['data'] + '\n' + 'You need to type in all the required fields.Please try again !'
 
+    if(response['output']['nodes_visited'][0] == 'face'):
+        more_response = atmLocator.getAtm()
+        final_response['map'] = 1
+        final_response['data'] = more_response
 
     if(response['output']['nodes_visited'][0] == 'map'):
         more_response = atmLocator.getAtm()
         final_response['map'] = 1
         final_response['data'] = more_response
+
+    if(response['output']['nodes_visited'][0] == 'face-verify'):
+        final_response['faceverify'] = 1
 
 
     # updating context stuff

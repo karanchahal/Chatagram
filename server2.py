@@ -31,9 +31,13 @@ def faceverify(payload):
 
     im = Image.open("./dump/imageToSave.webp").convert("RGB")
     im.save("./actual/final_image.jpg","jpeg")
-
-    account_id = faceRecognizer.facerec(dir_path + '/actual/final_image.jpg')
-    print('AccountId: ',account_id)
+    try:
+        account_id = faceRecognizer.facerec(dir_path + '/actual/final_image.jpg')
+        print('AccountId: ',account_id)
+        emit('faceverify',{'acc_no':account_id})
+    except:
+        print('Boohoo')
+        emit('faceverify',{'acc_no':0})
 
 
 
