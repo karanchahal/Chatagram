@@ -37,7 +37,7 @@ def faceverify(payload):
         emit('faceverify',{'acc_no':account_id})
     except:
         print('Boohoo')
-        emit('faceverify',{'acc_no':0})
+        emit('faceverify',{'acc_no':'0000'})
 
 
 

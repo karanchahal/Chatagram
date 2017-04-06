@@ -10,7 +10,7 @@ socketio = SocketIO(app)
 
 @socketio.on('faceverify')
 def handlefaceverify(payload):
-
+    print(payload['acc_no'])
     response = chatBot.converse(payload['acc_no'])
     print(response)
     emit('message',{'message':response['data']})
