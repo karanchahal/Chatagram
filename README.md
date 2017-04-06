@@ -1,16 +1,16 @@
 # Chatagram
 
-#To install kairos for face recognition
+# To install kairos for face recognition
 * in terminal,```cd``` into the directory and type ```chmod u+x kairos_install.sh``` and press enter
 * then, type ```./kairos_install.sh``` and press enter
 * kairos would have installed from source
 
-#Other dependencies for second server
+# Other dependencies for second server
 * flask (```pip install flask```)
 * Python 2.7
 
 
-#To start second server
+# To start second server
 start the server by typing ```python server2.py``` in terminal
 
 
