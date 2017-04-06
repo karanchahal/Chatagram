@@ -40,10 +40,10 @@ Requirements are as follows:
 * flask_socketio
 * watson_developer_cloud
 * requests
-* fileinput
-* json
-* urllib
-* PIL
+* fileinput (included with python3.5)
+* json (included with python3.5)
+* urllib (included with python3.5)
+* PIL (in case using windows use 'image')
 * numpy
 
 All these libraries can be installed using the simple ```pip install <library-name>``` command.
