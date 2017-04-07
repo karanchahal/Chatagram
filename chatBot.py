@@ -102,6 +102,9 @@ def dealWith(response,toneData):
 
         if(response['output']['nodes_visited'][0] == 'fund-transfer-account-number'):
             response['context']['transfer-to'] = getNumber(response['entities'])
+            if(response['context']['transfer-to'] not in users):
+                final_response['data'] = 'Sorry, you have entered incorrect details. There is no such account number'
+
 
         if(response['output']['nodes_visited'][0] == 'fund-transfer-balance'):
             amountTransfer = int(getNumber(response['entities']))
@@ -232,10 +235,13 @@ def dealWith(response,toneData):
 
 
     if(response['output']['nodes_visited'][0] == 'account-number'):
-        response['context']['acc_no'] = response['entities'][2]['value']
-        acc_no = response['context']['acc_no']
-        print(response['entities'])
-        response['context']['pincode'] = users[acc_no]['pincode']
+        try:
+            response['context']['acc_no'] = response['entities'][2]['value']
+            acc_no = response['context']['acc_no']
+            print(response['entities'])
+            response['context']['pincode'] = users[acc_no]['pincode']
+        except:
+            final_response['data'] = 'Sorry, you have entered incorrect details. There is no such account number'
 
 
     if(response['context']['sentiment'] > 2):
